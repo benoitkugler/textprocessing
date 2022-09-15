@@ -70,8 +70,9 @@ func (c CharAttr) IsWordStart() bool {
 }
 
 // IsWordEnd checks if it is the first non-word char after a word
-// 	Note that in degenerate cases, you could have both IsWordStart
-//  and IsWordEnd set for some character.
+//
+//		Note that in degenerate cases, you could have both IsWordStart
+//	 and IsWordEnd set for some character.
 func (c CharAttr) IsWordEnd() bool {
 	return c&WordEnd != 0
 }
@@ -268,17 +269,17 @@ func (c *CharAttr) setBreakRemovesPreceding(is bool) {
 type graphemeBreakType uint8
 
 const (
-	gb_Other graphemeBreakType = iota
-	gb_ControlCRLF
-	gb_Extend
-	gb_ZWJ
-	gb_Prepend
-	gb_SpacingMark
-	gb_InHangulSyllable /* Handles all of L, V, T, LV, LVT rules */
+	gbOther graphemeBreakType = iota
+	gbControlCRLF
+	gbExtend
+	gbZWJ
+	gbPrepend
+	gbSpacingMark
+	gbInHangulSyllable /* Handles all of L, V, T, LV, LVT rules */
 	/* Use state machine to handle emoji sequence */
 	/* Rule GB12 and GB13 */
-	gb_RI_Odd  /* Meets odd number of RI */
-	gb_RI_Even /* Meets even number of RI */
+	gbRiOdd  /* Meets odd number of RI */
+	gbRiEven /* Meets even number of RI */
 )
 
 /* See Word_Break Property Values table of UAX#29 */
@@ -322,15 +323,14 @@ const (
 	sb_STerm_Close_Sp
 )
 
-/* Rule LB25 with Example 7 of Customization */
 type lineBreakType uint8
 
 const (
-	lb_Other lineBreakType = iota
-	lb_Numeric
-	lb_Numeric_Close
-	lb_RI_Odd
-	lb_RI_Even
+	lbOther lineBreakType = iota
+	lbNumeric
+	lbNumericClose
+	lbRiOdd
+	lbRiEven
 )
 
 // Previously "123foo" was two words. But in UAX 29 of Unicode,
@@ -346,10 +346,10 @@ const (
 type breakOpportunity uint8
 
 const (
-	break_ALREADY_HANDLED breakOpportunity = iota /* didn't use the table */
-	break_PROHIBITED                              /* no break, even if spaces intervene */
-	break_IF_SPACES                               /* "indirect break" (only if there are spaces) */
-	break_ALLOWED                                 /* "direct break" (can always break here) */
+	breakAlreadyHandled breakOpportunity = iota /* didn't use the table */
+	breakProhibited                             /* no break, even if spaces intervene */
+	breakIfSpaces                               /* "indirect break" (only if there are spaces) */
+	breakAllowed                                /* "direct break" (can always break here) */
 	// TR 14 has two more break-opportunity classes,
 	// "indirect break opportunity for combining marks following a space"
 	// and "prohibited break for combining marks"
@@ -832,7 +832,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 
 		prevScript = language.Common
 
-		prevGbType              = gb_Other
+		prevGbType              = gbOther
 		metExtendedPictographic = false
 
 		prevPrevWbType = wb_Other
@@ -843,7 +843,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 		prevSbType     = sb_Other
 		prevSbI        = -1
 
-		prevLbType = lb_Other
+		prevLbType = lbOther
 
 		currentWordType               = wordNone
 		lastWordLetter, baseCharacter rune
@@ -924,14 +924,14 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 		var isGraphemeBoundary bool
 		{
 			/* Find the GraphemeBreakType of wc */
-			gbType := gb_Other
+			gbType := gbOther
 			switch type_ {
 			case unicode.Cf:
 				if wc == 0x200C {
-					gbType = gb_Extend
+					gbType = gbExtend
 					break
 				} else if wc == 0x200D {
-					gbType = gb_ZWJ
+					gbType = gbZWJ
 					break
 				} else if (wc >= 0x600 && wc <= 0x605) ||
 					wc == 0x6DD ||
@@ -940,69 +940,69 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 					wc == 0xD4E ||
 					wc == 0x110BD ||
 					(wc >= 0x111C2 && wc <= 0x111C3) {
-					gbType = gb_Prepend
+					gbType = gbPrepend
 					break
 				}
 				/* Tag chars */
 				if wc >= 0xE0020 && wc <= 0xE00FF {
-					gbType = gb_Extend
+					gbType = gbExtend
 					break
 				}
 				fallthrough
 			case unicode.Cc, unicode.Zl, unicode.Zp, unicode.Cs:
-				gbType = gb_ControlCRLF
+				gbType = gbControlCRLF
 			case nil:
 				/* Unassigned default ignorables */
 				if (wc >= 0xFFF0 && wc <= 0xFFF8) || (wc >= 0xE0000 && wc <= 0xE0FFF) {
-					gbType = gb_ControlCRLF
+					gbType = gbControlCRLF
 					break
 				}
 				fallthrough
 			case unicode.Lo:
 				if makesHangulSyllable {
-					gbType = gb_InHangulSyllable
+					gbType = gbInHangulSyllable
 				}
 			case unicode.Lm:
 				if wc >= 0xFF9E && wc <= 0xFF9F {
-					gbType = gb_Extend /* Other_Grapheme_Extend */
+					gbType = gbExtend /* Other_Grapheme_Extend */
 				}
 			case unicode.Mc:
-				gbType = gb_SpacingMark /* SpacingMark */
+				gbType = gbSpacingMark /* SpacingMark */
 				if wc >= 0x0900 {
 					if wc == 0x09BE || wc == 0x09D7 ||
 						wc == 0x0B3E || wc == 0x0B57 || wc == 0x0BBE || wc == 0x0BD7 ||
 						wc == 0x0CC2 || wc == 0x0CD5 || wc == 0x0CD6 ||
 						wc == 0x0D3E || wc == 0x0D57 || wc == 0x0DCF || wc == 0x0DDF ||
 						wc == 0x1D165 || (wc >= 0x1D16E && wc <= 0x1D172) {
-						gbType = gb_Extend /* Other_Grapheme_Extend */
+						gbType = gbExtend /* Other_Grapheme_Extend */
 					}
 				}
 			case unicode.Me, unicode.Mn:
-				gbType = gb_Extend /* Grapheme_Extend */
+				gbType = gbExtend /* Grapheme_Extend */
 			case unicode.So:
 				if wc >= 0x1F1E6 && wc <= 0x1F1FF {
-					if prevGbType == gb_RI_Odd {
-						gbType = gb_RI_Even
+					if prevGbType == gbRiOdd {
+						gbType = gbRiEven
 					} else {
-						gbType = gb_RI_Odd
+						gbType = gbRiOdd
 					}
 				}
 			case unicode.Sk:
 				/* Fitzpatrick modifiers */
 				if wc >= 0x1F3FB && wc <= 0x1F3FF {
-					gbType = gb_Extend
+					gbType = gbExtend
 				}
 			}
 
 			/* Rule GB11 */
 			if metExtendedPictographic {
-				if gbType == gb_Extend {
+				if gbType == gbExtend {
 					metExtendedPictographic = true
-				} else if unicode.Is(ucd.Extended_Pictographic, prevWc) && gbType == gb_ZWJ {
+				} else if unicode.Is(ucd.Extended_Pictographic, prevWc) && gbType == gbZWJ {
 					metExtendedPictographic = true
-				} else if prevGbType == gb_Extend && gbType == gb_ZWJ {
+				} else if prevGbType == gbExtend && gbType == gbZWJ {
 					metExtendedPictographic = true
-				} else if prevGbType == gb_ZWJ && isExtendedPictographic {
+				} else if prevGbType == gbZWJ && isExtendedPictographic {
 					metExtendedPictographic = true
 				} else {
 					metExtendedPictographic = false
@@ -1013,23 +1013,23 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 			/* We apply Rules GB1 && GB2 at the end of the function */
 			if wc == '\n' && prevWc == '\r' {
 				isGraphemeBoundary = false /* Rule GB3 */
-			} else if prevGbType == gb_ControlCRLF || gbType == gb_ControlCRLF {
+			} else if prevGbType == gbControlCRLF || gbType == gbControlCRLF {
 				isGraphemeBoundary = true /* Rules GB4 && GB5 */
-			} else if gbType == gb_InHangulSyllable {
+			} else if gbType == gbInHangulSyllable {
 				isGraphemeBoundary = false /* Rules GB6, GB7, GB8 */
-			} else if gbType == gb_Extend {
+			} else if gbType == gbExtend {
 				isGraphemeBoundary = false /* Rule GB9 */
-			} else if gbType == gb_ZWJ {
+			} else if gbType == gbZWJ {
 				isGraphemeBoundary = false /* Rule GB9 */
-			} else if gbType == gb_SpacingMark {
+			} else if gbType == gbSpacingMark {
 				isGraphemeBoundary = false /* Rule GB9a */
-			} else if prevGbType == gb_Prepend {
+			} else if prevGbType == gbPrepend {
 				isGraphemeBoundary = false /* Rule GB9b */
 			} else if isExtendedPictographic { /* Rule GB11 */
-				if prevGbType == gb_ZWJ && metExtendedPictographic {
+				if prevGbType == gbZWJ && metExtendedPictographic {
 					isGraphemeBoundary = false
 				}
-			} else if prevGbType == gb_RI_Odd && gbType == gb_RI_Even {
+			} else if prevGbType == gbRiOdd && gbType == gbRiEven {
 				isGraphemeBoundary = false /* Rule GB12 && GB13 */
 			}
 
@@ -1348,7 +1348,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 			attrs[i].setSentenceBoundary(isSentenceBoundary)
 		}
 		/* ---- Line breaking ---- */
-		breakOp = break_ALREADY_HANDLED
+		breakOp = breakAlreadyHandled
 
 		rowBreakType = prevBreakType
 		if prevBreakType == ucd.BreakSP {
@@ -1387,32 +1387,32 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 			breakType == ucd.BreakRI {
 
 			/* Find the LineBreakType of wc */
-			lbType := lb_Other
+			lbType := lbOther
 
 			if breakType == ucd.BreakNU {
-				lbType = lb_Numeric
+				lbType = lbNumeric
 			}
 			if breakType == ucd.BreakSY ||
 				breakType == ucd.BreakIS {
-				if !(prevLbType == lb_Numeric) {
-					lbType = lb_Other
+				if !(prevLbType == lbNumeric) {
+					lbType = lbOther
 				}
 			}
 
 			if breakType == ucd.BreakCL ||
 				breakType == ucd.BreakCP {
-				if prevLbType == lb_Numeric {
-					lbType = lb_Numeric_Close
+				if prevLbType == lbNumeric {
+					lbType = lbNumericClose
 				} else {
-					lbType = lb_Other
+					lbType = lbOther
 				}
 			}
 
 			if breakType == ucd.BreakRI {
-				if prevLbType == lb_RI_Odd {
-					lbType = lb_RI_Even
+				if prevLbType == lbRiOdd {
+					lbType = lbRiEven
 				} else {
-					lbType = lb_RI_Odd
+					lbType = lbRiOdd
 				}
 			}
 
@@ -1434,40 +1434,40 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				prevBreakType == ucd.BreakHL ||
 				prevBreakType == ucd.BreakNU) &&
 				breakType == ucd.BreakOP {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType == ucd.BreakCP &&
 				(breakType == ucd.BreakAL ||
 					breakType == ucd.BreakHL ||
 					breakType == ucd.BreakNU) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB30a */
-			if prevLbType == lb_RI_Odd && lbType == lb_RI_Even {
-				breakOp = break_PROHIBITED
+			if prevLbType == lbRiOdd && lbType == lbRiEven {
+				breakOp = breakProhibited
 			}
 			/* Rule LB30b */
 			if prevBreakType == ucd.BreakEB && breakType == ucd.BreakEM {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 
 			if unicode.Is(ucd.Extended_Pictographic, prevWc) && unicodedata.LookupType(prevWc) == nil &&
 				breakType == ucd.BreakEM {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 
 			/* Rule LB29 */
 			if prevBreakType == ucd.BreakIS &&
 				(breakType == ucd.BreakAL ||
 					breakType == ucd.BreakHL) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB28 */
 			if (prevBreakType == ucd.BreakAL ||
 				prevBreakType == ucd.BreakHL) &&
 				(breakType == ucd.BreakAL ||
 					breakType == ucd.BreakHL) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB27 */
 			if (prevBreakType == ucd.BreakJL ||
@@ -1476,7 +1476,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				prevBreakType == ucd.BreakH2 ||
 				prevBreakType == ucd.BreakH3) &&
 				breakType == ucd.BreakPO {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType == ucd.BreakPR &&
 				(breakType == ucd.BreakJL ||
@@ -1484,7 +1484,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 					breakType == ucd.BreakJT ||
 					breakType == ucd.BreakH2 ||
 					breakType == ucd.BreakH3) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB26 */
 			if prevBreakType == ucd.BreakJL &&
@@ -1492,113 +1492,113 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 					breakType == ucd.BreakJV ||
 					breakType == ucd.BreakH2 ||
 					breakType == ucd.BreakH3) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakJV ||
 				prevBreakType == ucd.BreakH2) &&
 				(breakType == ucd.BreakJV ||
 					breakType == ucd.BreakJT) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakJT ||
 				prevBreakType == ucd.BreakH3) &&
 				breakType == ucd.BreakJT {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB25 with Example 7 of Customization */
 			if (prevBreakType == ucd.BreakPR ||
 				prevBreakType == ucd.BreakPO) &&
 				breakType == ucd.BreakNU {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakPR ||
 				prevBreakType == ucd.BreakPO) &&
 				(breakType == ucd.BreakOP ||
 					breakType == ucd.BreakHY) &&
 				nextBreakType == ucd.BreakNU {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakOP ||
 				prevBreakType == ucd.BreakHY) &&
 				breakType == ucd.BreakNU {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType == ucd.BreakNU &&
 				(breakType == ucd.BreakNU ||
 					breakType == ucd.BreakSY ||
 					breakType == ucd.BreakIS) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
-			if prevLbType == lb_Numeric &&
+			if prevLbType == lbNumeric &&
 				(breakType == ucd.BreakNU ||
 					breakType == ucd.BreakSY ||
 					breakType == ucd.BreakIS ||
 					breakType == ucd.BreakCL ||
 					breakType == ucd.BreakCP) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
-			if (prevLbType == lb_Numeric ||
-				prevLbType == lb_Numeric_Close) &&
+			if (prevLbType == lbNumeric ||
+				prevLbType == lbNumericClose) &&
 				(breakType == ucd.BreakPO ||
 					breakType == ucd.BreakPR) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB24 */
 			if (prevBreakType == ucd.BreakPR ||
 				prevBreakType == ucd.BreakPO) &&
 				(breakType == ucd.BreakAL ||
 					breakType == ucd.BreakHL) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakAL ||
 				prevBreakType == ucd.BreakHL) &&
 				(breakType == ucd.BreakPR || breakType == ucd.BreakPO) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB23 */
 			if (prevBreakType == ucd.BreakAL ||
 				prevBreakType == ucd.BreakHL) &&
 				breakType == ucd.BreakNU {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType == ucd.BreakNU &&
 				(breakType == ucd.BreakAL ||
 					breakType == ucd.BreakHL) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rule LB23a */
 			if prevBreakType == ucd.BreakPR &&
 				(breakType == ucd.BreakID ||
 					breakType == ucd.BreakEB ||
 					breakType == ucd.BreakEM) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if (prevBreakType == ucd.BreakID ||
 				prevBreakType == ucd.BreakEB ||
 				prevBreakType == ucd.BreakEM) &&
 				breakType == ucd.BreakPO {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 
 			/* Rule LB22 */
 			if breakType == ucd.BreakIN {
 				if prevBreakType == ucd.BreakAL ||
 					prevBreakType == ucd.BreakHL {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 				if prevBreakType == ucd.BreakEX {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 				if prevBreakType == ucd.BreakID ||
 					prevBreakType == ucd.BreakEB ||
 					prevBreakType == ucd.BreakEM {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 				if prevBreakType == ucd.BreakIN {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 				if prevBreakType == ucd.BreakNU {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 			}
 
@@ -1606,70 +1606,70 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				breakType == ucd.BreakHY ||
 				breakType == ucd.BreakNS ||
 				prevBreakType == ucd.BreakBB {
-				breakOp = break_PROHIBITED /* Rule LB21 */
+				breakOp = breakProhibited /* Rule LB21 */
 			}
 			if prevPrevBreakType == ucd.BreakHL &&
 				(prevBreakType == ucd.BreakHY ||
 					prevBreakType == ucd.BreakBA) {
-				breakOp = break_PROHIBITED /* Rule LB21a */
+				breakOp = breakProhibited /* Rule LB21a */
 			}
 			if prevBreakType == ucd.BreakSY &&
 				breakType == ucd.BreakHL {
-				breakOp = break_PROHIBITED /* Rule LB21b */
+				breakOp = breakProhibited /* Rule LB21b */
 			}
 			if prevBreakType == ucd.BreakCB ||
 				breakType == ucd.BreakCB {
-				breakOp = break_ALLOWED /* Rule LB20 */
+				breakOp = breakAllowed /* Rule LB20 */
 			}
 			if prevBreakType == ucd.BreakQU ||
 				breakType == ucd.BreakQU {
-				breakOp = break_PROHIBITED /* Rule LB19 */
+				breakOp = breakProhibited /* Rule LB19 */
 			}
 
 			/* handle related rules for Space as state machine here,
 			   and override the pair table result. */
 			if prevBreakType == ucd.BreakSP { /* Rule LB18 */
-				breakOp = break_ALLOWED
+				breakOp = breakAllowed
 			}
 			if rowBreakType == ucd.BreakB2 &&
 				breakType == ucd.BreakB2 {
-				breakOp = break_PROHIBITED /* Rule LB17 */
+				breakOp = breakProhibited /* Rule LB17 */
 			}
 			if (rowBreakType == ucd.BreakCL ||
 				rowBreakType == ucd.BreakCP) &&
 				breakType == ucd.BreakNS {
-				breakOp = break_PROHIBITED /* Rule LB16 */
+				breakOp = breakProhibited /* Rule LB16 */
 			}
 			if rowBreakType == ucd.BreakQU &&
 				breakType == ucd.BreakOP {
-				breakOp = break_PROHIBITED /* Rule LB15 */
+				breakOp = breakProhibited /* Rule LB15 */
 			}
 			if rowBreakType == ucd.BreakOP {
-				breakOp = break_PROHIBITED /* Rule LB14 */
+				breakOp = breakProhibited /* Rule LB14 */
 			}
 			/* Rule LB13 with Example 7 of Customization */
 			if breakType == ucd.BreakEX {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType != ucd.BreakNU &&
 				(breakType == ucd.BreakCL ||
 					breakType == ucd.BreakCP ||
 					breakType == ucd.BreakIS ||
 					breakType == ucd.BreakSY) {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			if prevBreakType == ucd.BreakGL {
-				breakOp = break_PROHIBITED /* Rule LB12 */
+				breakOp = breakProhibited /* Rule LB12 */
 			}
 			if breakType == ucd.BreakGL &&
 				(prevBreakType != ucd.BreakSP &&
 					prevBreakType != ucd.BreakBA &&
 					prevBreakType != ucd.BreakHY) {
-				breakOp = break_PROHIBITED /* Rule LB12a */
+				breakOp = breakProhibited /* Rule LB12a */
 			}
 			if prevBreakType == ucd.BreakWJ ||
 				breakType == ucd.BreakWJ {
-				breakOp = break_PROHIBITED /* Rule LB11 */
+				breakOp = breakProhibited /* Rule LB11 */
 			}
 
 			/* Rule LB9 */
@@ -1681,26 +1681,26 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 					prevBreakType == ucd.BreakNL ||
 					prevBreakType == ucd.BreakSP ||
 					prevBreakType == ucd.BreakZW) {
-					breakOp = break_PROHIBITED
+					breakOp = breakProhibited
 				}
 			}
 
 			if rowBreakType == ucd.BreakZW {
-				breakOp = break_ALLOWED /* Rule LB8 */
+				breakOp = breakAllowed /* Rule LB8 */
 			}
 			if prevWc == 0x200D {
-				breakOp = break_PROHIBITED /* Rule LB8a */
+				breakOp = breakProhibited /* Rule LB8a */
 			}
 			if breakType == ucd.BreakSP ||
 				breakType == ucd.BreakZW {
-				breakOp = break_PROHIBITED /* Rule LB7 */
+				breakOp = breakProhibited /* Rule LB7 */
 			}
 			/* Rule LB6 */
 			if breakType == ucd.BreakBK ||
 				breakType == ucd.BreakCR ||
 				breakType == ucd.BreakLF ||
 				breakType == ucd.BreakNL {
-				breakOp = break_PROHIBITED
+				breakOp = breakProhibited
 			}
 			/* Rules LB4 and LB5 */
 			if prevBreakType == ucd.BreakBK ||
@@ -1708,21 +1708,21 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				prevBreakType == ucd.BreakLF ||
 				prevBreakType == ucd.BreakNL {
 				attrs[i].setMandatoryBreak(true)
-				breakOp = break_ALLOWED
+				breakOp = breakAllowed
 			}
 
 			switch breakOp {
-			case break_PROHIBITED:
+			case breakProhibited:
 				/* can't break here */
 				attrs[i].setLineBreak(false)
-			case break_IF_SPACES:
+			case breakIfSpaces:
 				/* break if prev char was space */
 				if prevBreakType != ucd.BreakSP {
 					attrs[i].setLineBreak(false)
 				}
-			case break_ALLOWED:
+			case breakAllowed:
 				attrs[i].setLineBreak(true)
-			case break_ALREADY_HANDLED:
+			case breakAlreadyHandled:
 			}
 
 			/* Rule LB9 */
@@ -1732,7 +1732,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				if breakType == ucd.BreakNU ||
 					breakType == ucd.BreakSY ||
 					breakType == ucd.BreakIS {
-					if prevLbType != lb_Numeric {
+					if prevLbType != lbNumeric {
 						prevLbType = lbType
 					} /* else don't change the prevLbType */
 				} else {
