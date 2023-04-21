@@ -262,9 +262,9 @@ func checkLineChar(t *testing.T,
 	attr, prevAttr, nextAttr *pango.CharAttr,
 ) {
 	prevBreakType := unicodedata.BreakXX
-	breakType := unicodedata.LookupBreakClass(wc)
+	breakType := unicodedata.LookupLineBreakClass(wc)
 	if prevWc != 0 {
-		prevBreakType = unicodedata.LookupBreakClass(prevWc)
+		prevBreakType = unicodedata.LookupLineBreakClass(prevWc)
 	}
 
 	if wc == '\n' {
@@ -282,7 +282,7 @@ func checkLineChar(t *testing.T,
 	}
 
 	if breakType == unicodedata.BreakSP {
-		nextBreak := unicodedata.LookupBreakClass(nextWc)
+		nextBreak := unicodedata.LookupLineBreakClass(nextWc)
 		assertFalse(t, attr.IsLineBreak() && prevAttr != nil &&
 			!attr.IsMandatoryBreak() &&
 			!(nextWc != 0 && nextBreak == unicodedata.BreakCM),

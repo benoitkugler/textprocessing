@@ -70,8 +70,9 @@ func (c CharAttr) IsWordStart() bool {
 }
 
 // IsWordEnd checks if it is the first non-word char after a word
-// 	Note that in degenerate cases, you could have both IsWordStart
-//  and IsWordEnd set for some character.
+//
+//		Note that in degenerate cases, you could have both IsWordStart
+//	 and IsWordEnd set for some character.
 func (c CharAttr) IsWordEnd() bool {
 	return c&WordEnd != 0
 }
@@ -451,7 +452,7 @@ func removeBreaksFromRange(text []rune, logAttrs []CharAttr, startPos, endPos in
 		}
 
 		ch := text[pos]
-		bt := unicodedata.LookupBreakClass(ch)
+		bt := unicodedata.LookupLineBreakClass(ch)
 
 		/* Hyphens and visible word dividers */
 		if afterHyphen {
@@ -861,7 +862,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 		nextWc = text[0]
 	}
 
-	nextBreakType := ucd.LookupBreakClass(nextWc)
+	nextBreakType := ucd.LookupLineBreakClass(nextWc)
 	for i = 0; !done; i++ {
 		var (
 			makesHangulSyllable bool
@@ -889,7 +890,7 @@ func pangoDefaultBreak(text []rune, attrs []CharAttr) {
 				nextWc = text[i+1]
 			}
 
-			nextBreakType = ucd.LookupBreakClass(nextWc)
+			nextBreakType = ucd.LookupLineBreakClass(nextWc)
 		}
 
 		type_ := ucd.LookupType(wc)

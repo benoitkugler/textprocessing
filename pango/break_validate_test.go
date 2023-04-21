@@ -49,14 +49,14 @@ func checkLineChar(pos int,
 	wc, prevWc, nextWc rune,
 	type_, prevType, nextType *unicode.RangeTable,
 	attr, prevAttr, nextAttr *CharAttr,
-	afterZws *bool) error {
-
-	breakType := ucd.LookupBreakClass(wc)
-	next_break_type := ucd.LookupBreakClass(nextWc)
+	afterZws *bool,
+) error {
+	breakType := ucd.LookupLineBreakClass(wc)
+	next_break_type := ucd.LookupLineBreakClass(nextWc)
 
 	var prevBreakType *unicode.RangeTable
 	if prevWc != 0 {
-		prevBreakType = ucd.LookupBreakClass(prevWc)
+		prevBreakType = ucd.LookupLineBreakClass(prevWc)
 	}
 
 	*afterZws = (prevBreakType == ucd.BreakZW ||
@@ -254,20 +254,20 @@ func checkSpaceInvariants(text []rune, attrs []CharAttr) error {
 // relies on. It is not guaranteed to be an exhaustive
 // validity test. Currentlty, it checks that
 //
-// - There's no break before the first char
-// - Mandatory breaks are line breaks
-// - Line breaks are char breaks
-// - Lines aren't broken between \\r and \\n
-// - Lines aren't broken before a space (unless the break
-//   is mandatory, or the space precedes a combining mark)
-// - Lines aren't broken between two open punctuation
-//   or between two close punctuation characters
-// - Lines aren't broken between a letter and a quotation mark
-// - Word starts and ends alternate
-// - Sentence starts and ends alternate
-// - Expandable spaces are spaces
-// - Words don't end in the middle of graphemes
-// - Sentences don't end in the middle of words
+//   - There's no break before the first char
+//   - Mandatory breaks are line breaks
+//   - Line breaks are char breaks
+//   - Lines aren't broken between \\r and \\n
+//   - Lines aren't broken before a space (unless the break
+//     is mandatory, or the space precedes a combining mark)
+//   - Lines aren't broken between two open punctuation
+//     or between two close punctuation characters
+//   - Lines aren't broken between a letter and a quotation mark
+//   - Word starts and ends alternate
+//   - Sentence starts and ends alternate
+//   - Expandable spaces are spaces
+//   - Words don't end in the middle of graphemes
+//   - Sentences don't end in the middle of words
 func ValidateCharacterAttributes(text []rune, attrs []CharAttr) error {
 	if len(attrs) != len(text)+1 {
 		return fmt.Errorf("Array has wrong length")
