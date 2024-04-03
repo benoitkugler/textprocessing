@@ -126,9 +126,9 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 				case opEqual:
 					switch famOp {
 					case opEqual:
-						subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang:%q,family: %q}", language.NewLanguage(lang), fam)
+						subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
 					case opNotEqual:
-						subs.TestCode = fmt.Sprintf("langEqualsAndNoFamily{lang:%q,family: %q}", language.NewLanguage(lang), fam)
+						subs.TestCode = fmt.Sprintf("langEqualsAndNoFamily{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
 					default:
 						return nil, fmt.Errorf("family op not supported: %v", tests)
 					}
@@ -136,7 +136,7 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 					if famOp != opEqual {
 						return nil, fmt.Errorf("family op not supported: %v", tests)
 					}
-					subs.TestCode = fmt.Sprintf("langContainsAndFamilyEquals{lang:%q,family: %q}", language.NewLanguage(lang), fam)
+					subs.TestCode = fmt.Sprintf("langContainsAndFamilyEquals{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
 				default:
 					return nil, fmt.Errorf("test not supported: %v", tests)
 				}
