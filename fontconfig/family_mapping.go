@@ -129,6 +129,7 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 						subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
 					case opNotEqual:
 						subs.TestCode = fmt.Sprintf("langEqualsAndNoFamily{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
+						subs.OpCode = "opAppendLast"
 					default:
 						return nil, fmt.Errorf("family op not supported: %v", tests)
 					}
