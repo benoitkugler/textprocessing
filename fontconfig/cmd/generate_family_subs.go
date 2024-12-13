@@ -48,8 +48,9 @@ var familySubstitution = []substitution{
 			test     :           %s,
 			additionalFamilies : []string{%s},
 			op               :   %s,
+			importance: %q,
 		},
-		`, subs.Comment, subs.TestCode, strings.Join(c, ", "), subs.OpCode)
+		`, subs.Comment, subs.TestCode, strings.Join(c, ", "), subs.OpCode, subs.Importance)
 	}
 
 	fmt.Fprintln(f, "}")

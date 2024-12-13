@@ -3,6 +3,7 @@ package fontconfig
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/benoitkugler/textlayout/language"
 )
@@ -43,6 +44,7 @@ type ExportedFamilySubstitution struct {
 	TestCode           string
 	OpCode             string   // how to insert the families
 	AdditionalFamilies []string // the families to add
+	Importance         byte     // how is the precedence
 }
 
 // GenerateSubstitution exports the Standard family substitution
@@ -69,6 +71,7 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 				Comment:            comment,
 				AdditionalFamilies: exprAsStringList(edit.expr),
 			}
+
 			switch edit.op.getOp() {
 			case opAppend:
 				subs.OpCode = "opAppend"
@@ -152,6 +155,19 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 			default:
 				log.Println("ignored test", tests)
 				continue
+			}
+
+			// add and check the precedence
+			switch edit.binding {
+			case vbWeak:
+				subs.Importance = 'w'
+			case vbSame:
+				if !(strings.HasPrefix(subs.TestCode, "familyEquals") || strings.HasPrefix(subs.TestCode, "langContainsAndFamilyEquals") || strings.HasPrefix(subs.TestCode, "familyContains")) {
+					return nil, fmt.Errorf("unsupported precedence 'equal' for test %s", subs.TestCode)
+				}
+				subs.Importance = 'e'
+			case vbStrong:
+				subs.Importance = 's'
 			}
 
 			substitutions = append(substitutions, subs)
