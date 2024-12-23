@@ -93,6 +93,11 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 			switch len(tests) {
 			case 1:
 				test := tests[0]
+				if test.object == SPACING {
+					log.Println("ignored test", tests)
+					continue
+				}
+
 				if test.object != FAMILY {
 					return nil, fmt.Errorf("test not supported: %v", test)
 				}
