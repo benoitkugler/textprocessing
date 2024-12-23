@@ -1,7 +1,7 @@
 #
-# fontconfig/fc-lang/ie.orth
+# fontconfig/fc-lang/hak.orth
 #
-# Copyright © 2002 Keith Packard
+# Copyright © 2022 Mike FABIAN
 #
 # Permission to use, copy, modify, distribute, and sell this software and its
 # documentation for any purpose is hereby granted without fee, provided that
@@ -21,21 +21,9 @@
 # TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 #
-# Interlingue (IE)
+# Hakka Chinese (hak)
 #
-# Source: http://interlingue.narod.ru/Haas.htm
-#
-0041-005a
-0061-007a
-00c1
-00c9
-00cd
-00d3
-00da
-00dd
-00e1
-00e9
-00ed
-00f3
-00fa
-00fd
+# See:
+#  https://en.wikipedia.org/wiki/Hakka_Chinese
+#  https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=localedata/locales/hak_TW
+include zh_tw.orth

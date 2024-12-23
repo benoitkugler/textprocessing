@@ -1,7 +1,7 @@
 #
-# fontconfig/fc-lang/ie.orth
+# fontconfig/fc-lang/niu.orth
 #
-# Copyright © 2002 Keith Packard
+# Copyright © 2022 Mike FABIAN
 #
 # Permission to use, copy, modify, distribute, and sell this software and its
 # documentation for any purpose is hereby granted without fee, provided that
@@ -21,21 +21,15 @@
 # TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 #
-# Interlingue (IE)
+# Niuean (niu)
 #
-# Source: http://interlingue.narod.ru/Haas.htm
-#
-0041-005a
-0061-007a
-00c1
-00c9
-00cd
-00d3
-00da
-00dd
-00e1
-00e9
-00ed
-00f3
-00fa
-00fd
+# See:
+#  https://en.wikipedia.org/wiki/Niuean_language#Orthography
+#  https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=localedata/locales/niu_NU
+#  https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=localedata/locales/niu_NZ
+include en.orth
+0101 # ā LATIN SMALL LETTER A WITH MACRON
+0113 # ē LATIN SMALL LETTER E WITH MACRON
+012b # ī LATIN SMALL LETTER I WITH MACRON
+014d # ō LATIN SMALL LETTER O WITH MACRON
+016b # ū LATIN SMALL LETTER U WITH MACRON

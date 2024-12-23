@@ -2872,6 +2872,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("agr"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("agr"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("ak"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -2908,6 +2922,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("an"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("anp"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("anp"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -2984,6 +3012,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("ayc"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("ayc"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("ba"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -3012,6 +3054,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("bem"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("bem"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("bg"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -3034,6 +3090,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("bh"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("bhb"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("bhb"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -3264,6 +3334,34 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("ckb"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("ckb"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("cmn"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("cmn"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("co"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -3272,6 +3370,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("co"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("cop"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("cop"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -3398,6 +3510,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("doi"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("dsb"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("dsb"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -3740,6 +3866,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("got"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("got"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("gu"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -3782,6 +3922,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("hak"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("hak"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("haw"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -3818,6 +3972,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("hi"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("hif"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("hif"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -4440,6 +4608,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("lij"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("lij"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("ln"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -4496,6 +4678,34 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("lzh"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("lzh"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("mag"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("mag"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("mai"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -4504,6 +4714,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("mai"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("mfe"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("mfe"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -4538,6 +4762,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("mhr"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("mhr"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("mi"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -4546,6 +4784,34 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("mi"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("miq"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("miq"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("mjw"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("mjw"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -4588,6 +4854,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("mni"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("mnw"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("mnw"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -4678,6 +4958,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("nan"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("nan"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("nb"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -4728,6 +5022,34 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("ng"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("nhn"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("nhn"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("niu"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("niu"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -4986,6 +5308,34 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("raj"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("raj"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("rif"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("rif"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("rm"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -5182,6 +5532,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("sgs"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("sgs"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("sh"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -5190,6 +5554,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("sh"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("shn"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("shn"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -5476,6 +5854,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("szl"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("szl"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("ta"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -5484,6 +5876,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("ta"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("tcy"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("tcy"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -5526,6 +5932,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("th"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("the"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("the"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -5596,6 +6016,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("to"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("tpi"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("tpi"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */
@@ -5714,6 +6148,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("unm"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("unm"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("ur"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -5812,6 +6260,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("wae"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("wae"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("wal"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -5904,6 +6366,34 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("yo"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("yue"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("yue"), op: 2 /* String */},
+				binding: 2,
+				object:  34, /* lang */
+				op:      11, /* Assign */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("yuw"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 34, /* lang */
+				op:     24, /* Contains */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("yuw"), op: 2 /* String */},
 				binding: 2,
 				object:  34, /* lang */
 				op:      11, /* Assign */

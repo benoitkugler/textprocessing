@@ -1,7 +1,7 @@
 #
-# fontconfig/fc-lang/ie.orth
+# fontconfig/fc-lang/rif.orth
 #
-# Copyright © 2002 Keith Packard
+# Copyright © 2022 Mike FABIAN
 #
 # Permission to use, copy, modify, distribute, and sell this software and its
 # documentation for any purpose is hereby granted without fee, provided that
@@ -21,21 +21,23 @@
 # TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 #
-# Interlingue (IE)
+# Riffian (rif)
 #
-# Source: http://interlingue.narod.ru/Haas.htm
-#
-0041-005a
-0061-007a
-00c1
-00c9
-00cd
-00d3
-00da
-00dd
-00e1
-00e9
-00ed
-00f3
-00fa
-00fd
+# See:
+#  https://en.wikipedia.org/wiki/Tarifit
+#  https://en.wikipedia.org/wiki/Berber_Latin_alphabet
+#  https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=localedata/locales/rif_MA
+include en.orth
+010d # č LATIN SMALL LETTER C WITH CARON
+1e0d # ḍ LATIN SMALL LETTER D WITH DOT BELOW
+025b # ɛ LATIN SMALL LETTER OPEN E
+01e7 # ǧ LATIN SMALL LETTER G WITH CARON
+0263 # ɣ LATIN SMALL LETTER GAMMA
+1e25 # ḥ LATIN SMALL LETTER H WITH DOT BELOW
+0159 # ř LATIN SMALL LETTER R WITH CARON
+1e5b # ṛ LATIN SMALL LETTER R WITH DOT BELOW
+1e63 # ṣ LATIN SMALL LETTER S WITH DOT BELOW
+1e6d # ṭ LATIN SMALL LETTER T WITH DOT BELOW
+1e93 # ẓ LATIN SMALL LETTER Z WITH DOT BELOW
+
+

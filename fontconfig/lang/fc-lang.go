@@ -1,6 +1,8 @@
 // Read a set of language orthographies and build Go declarations for
 // charsets which can then be used to identify which languages are
 // supported by a given font.
+//
+// ./fc-lang -table ../lang_table.go -conf ../confs/
 package main
 
 import (
@@ -259,8 +261,8 @@ func generateLangTable(output string) {
 	fmt.Fprintln(outputFile)
 	fmt.Fprintf(outputFile, "// Number of charsets: %d\n\n", len(sets))
 
-	// If this fails, the lang indices will need to be 16-bit, instead of a single byte.
-	assert(len(sets) < 256)
+	// If this fails, the lang indices will need to be 32-bit, instead of a 16-bit.
+	assert(len(sets) < 65536)
 
 	// Serialize leaves
 	dumpLeaves := func(leaves [][8]uint32) string {
@@ -291,7 +293,7 @@ func generateLangTable(output string) {
 	fmt.Fprintln(outputFile)
 
 	// langIndices
-	fmt.Fprintln(outputFile, "var fcLangCharSetIndices = [...]byte{")
+	fmt.Fprintln(outputFile, "var fcLangCharSetIndices = [...]uint16{")
 	for i := range sets {
 		fn := fmt.Sprintf("%s.orth", names[i])
 		fmt.Fprintf(outputFile, "    %d, /* %s */\n", orthEntries[fn], names[i])
@@ -299,7 +301,7 @@ func generateLangTable(output string) {
 	fmt.Fprintln(outputFile, "}")
 
 	// langIndicesInv
-	fmt.Fprintln(outputFile, "var fcLangCharSetIndicesInv = [...]byte{")
+	fmt.Fprintln(outputFile, "var fcLangCharSetIndicesInv = [...]uint16{")
 	var invLines []string // to sort
 	for k, pos := range orthEntries {
 		name := getName(k)
@@ -379,7 +381,7 @@ func max(a, b int) int {
 }
 
 // Do not reorder, magic
-var orthFiles = []string{
+var orthFiles = [...]string{
 	"aa.orth",
 	"ab.orth",
 	"af.orth",
@@ -626,4 +628,39 @@ var orthFiles = []string{
 	"mni.orth",
 	"und_zsye.orth",
 	"und_zmth.orth",
+	"anp.orth",
+	"bhb.orth",
+	"hif.orth",
+	"mag.orth",
+	"raj.orth",
+	"the.orth",
+	"agr.orth",
+	"ayc.orth",
+	"bem.orth",
+	"ckb.orth",
+	"cmn.orth",
+	"dsb.orth",
+	"hak.orth",
+	"lij.orth",
+	"lzh.orth",
+	"mfe.orth",
+	"mhr.orth",
+	"miq.orth",
+	"mjw.orth",
+	"mnw.orth",
+	"nan.orth",
+	"nhn.orth",
+	"niu.orth",
+	"rif.orth",
+	"sgs.orth",
+	"shn.orth",
+	"szl.orth",
+	"tcy.orth",
+	"tpi.orth",
+	"unm.orth",
+	"wae.orth",
+	"yue.orth",
+	"yuw.orth",
+	"got.orth",
+	"cop.orth",
 }
