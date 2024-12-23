@@ -74,6 +74,15 @@ var Standard = &Config{
 				op:      15, /* Append */
 			}},
 		}}, nil, nil}},
+		{name: "confs/10-no-antialias.conf", description: "Disable antialiasing", domain: "", subst: [matchKindEnd][]directive{{{
+			tests: nil,
+			edits: []ruleEdit{{
+				expr:    &expression{u: Bool(0), op: 5 /* Bool */},
+				binding: 0,
+				object:  15, /* antialias */
+				op:      15, /* Append */
+			}},
+		}}, nil, nil}},
 		{name: "confs/10-no-sub-pixel.conf", description: "Disable sub-pixel rendering", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: nil,
 			edits: []ruleEdit{{
@@ -176,6 +185,15 @@ var Standard = &Config{
 				op:      15, /* Append */
 			}},
 		}}, nil, nil}},
+		{name: "confs/10-sub-pixel-none.conf", description: "Disable sub-pixel rendering", domain: "", subst: [matchKindEnd][]directive{{{
+			tests: nil,
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("none"), op: 10 /* Const */},
+				binding: 0,
+				object:  27, /* rgba */
+				op:      15, /* Append */
+			}},
+		}}, nil, nil}},
 		{name: "confs/10-sub-pixel-rgb.conf", description: "Enable sub-pixel rendering with the RGB stripes layout", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: nil,
 			edits: []ruleEdit{{
@@ -212,6 +230,15 @@ var Standard = &Config{
 				op:      15, /* Append */
 			}},
 		}}, nil, nil}},
+		{name: "confs/10-yes-antialias.conf", description: "Enable antialiasing", domain: "", subst: [matchKindEnd][]directive{{{
+			tests: nil,
+			edits: []ruleEdit{{
+				expr:    &expression{u: Bool(1), op: 5 /* Bool */},
+				binding: 0,
+				object:  15, /* antialias */
+				op:      15, /* Append */
+			}},
+		}}, nil, nil}},
 		{name: "confs/11-lcdfilter-default.conf", description: "Use lcddefault as default for LCD filter", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: nil,
 			edits: []ruleEdit{{
@@ -234,6 +261,15 @@ var Standard = &Config{
 			tests: nil,
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("lcdlight"), op: 10 /* Const */},
+				binding: 0,
+				object:  41, /* lcdfilter */
+				op:      15, /* Append */
+			}},
+		}}, nil, nil}},
+		{name: "confs/11-lcdfilter-none.conf", description: "Use lcdnone as default for LCD filter", domain: "", subst: [matchKindEnd][]directive{{{
+			tests: nil,
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("lcdnone"), op: 10 /* Const */},
 				binding: 0,
 				object:  41, /* lcdfilter */
 				op:      15, /* Append */
@@ -1616,6 +1652,20 @@ var Standard = &Config{
 		}}, nil, nil}},
 		{name: "confs/30-metric-aliases.conf", description: "Set substitutions for similar/metric-compatible families", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: []ruleTest{{
+				expr:   &expression{u: String("Helvetica LT Std"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("Helvetica"), op: 2 /* String */},
+				binding: 2,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("Nimbus Sans L"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -1725,6 +1775,20 @@ var Standard = &Config{
 				binding: 2,
 				object:  1,  /* family */
 				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Courier Std"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("Courier"), op: 2 /* String */},
+				binding: 2,
+				object:  1,  /* family */
+				op:      15, /* Append */
 			}},
 		}, {
 			tests: []ruleTest{{
@@ -2491,6 +2555,20 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
+				expr:    &expression{u: String("Helvetica LT Std"), op: 2 /* String */},
+				binding: 2,
+				object:  1,  /* family */
+				op:      15, /* Append */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Helvetica"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
 				expr:    &expression{u: String("TeX Gyre Heros"), op: 2 /* String */},
 				binding: 2,
 				object:  1,  /* family */
@@ -2534,6 +2612,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: String("TeX Gyre Cursor"), op: 2 /* String */},
+				binding: 2,
+				object:  1,  /* family */
+				op:      15, /* Append */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Courier"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("Courier Std"), op: 2 /* String */},
 				binding: 2,
 				object:  1,  /* family */
 				op:      15, /* Append */
@@ -6351,35 +6443,7 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
-				expr:   &expression{u: String("MgOpen Moderna"), op: 2 /* String */},
-				kind:   0,
-				qual:   0,
-				object: 1,     /* family */
-				op:     65558, /* Equal (ignore blanks) */
-			}},
-			edits: []ruleEdit{{
-				expr:    &expression{u: String("sans-serif"), op: 2 /* String */},
-				binding: 0,
-				object:  1,  /* family */
-				op:      16, /* AppendLast */
-			}},
-		}, {
-			tests: []ruleTest{{
 				expr:   &expression{u: String("MgOpen Modata"), op: 2 /* String */},
-				kind:   0,
-				qual:   0,
-				object: 1,     /* family */
-				op:     65558, /* Equal (ignore blanks) */
-			}},
-			edits: []ruleEdit{{
-				expr:    &expression{u: String("sans-serif"), op: 2 /* String */},
-				binding: 0,
-				object:  1,  /* family */
-				op:      16, /* AppendLast */
-			}},
-		}, {
-			tests: []ruleTest{{
-				expr:   &expression{u: String("MgOpen Cosmetica"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
 				object: 1,     /* family */
@@ -6587,6 +6651,342 @@ var Standard = &Config{
 				object:  1,  /* family */
 				op:      16, /* AppendLast */
 			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Arabic UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Bengali UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Devanagari UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Gujarati UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Gurmukhi UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Kannada UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Khmer UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Lao UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Malayalam UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Myanmar UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Oriya UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Sinhala UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Tamil UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Telugu UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans Thai UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Leelawadee UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Nirmala UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Yu Gothic UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Meiryo UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("MS UI Gothic"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Khmer UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Lao UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Microsoft JhengHei UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Microsoft YaHei UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
 		}}, nil, nil}},
 		{name: "confs/45-generic.conf", description: "Set substitutions for emoji/math fonts", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: []ruleTest{{
@@ -6661,6 +7061,20 @@ var Standard = &Config{
 		}, {
 			tests: []ruleTest{{
 				expr:   &expression{u: String("Emoji Two"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("emoji"), op: 2 /* String */},
+				binding: 2,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("JoyPixels"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
 				object: 1,     /* family */
@@ -7277,6 +7691,20 @@ var Standard = &Config{
 			}},
 		}, {
 			tests: []ruleTest{{
+				expr:   &expression{u: String("Helvetica LT Std"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("sans-serif"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
 				expr:   &expression{u: String("Helvetica"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -7474,6 +7902,20 @@ var Standard = &Config{
 		}, {
 			tests: []ruleTest{{
 				expr:   &expression{u: String("Courier New"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("monospace"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Courier Std"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
 				object: 1,     /* family */
@@ -7750,6 +8192,91 @@ var Standard = &Config{
 				binding: 0,
 				object:  1,  /* family */
 				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Cantarell"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Noto Sans UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Segoe UI"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Segoe UI Historic"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("Segoe UI Symbol"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("system-ui"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      16, /* AppendLast */
+			}},
+		}}, nil, nil}},
+		{name: "confs/48-spacing.conf", description: "Add mono to the family when spacing is 100", domain: "", subst: [matchKindEnd][]directive{{{
+			tests: []ruleTest{{
+				expr:   &expression{u: Int(100), op: 0 /* Int */},
+				kind:   0,
+				qual:   0,
+				object: 13, /* spacing */
+				op:     22, /* Equal */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: String("monospace"), op: 2 /* String */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      14, /* Prepend */
 			}},
 		}}, nil, nil}},
 		{name: "confs/49-sansserif.conf", description: "Add sans-serif to the family when no generic name", domain: "", subst: [matchKindEnd][]directive{{{
@@ -8624,7 +9151,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("Noto Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Apple Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Segoe UI Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Twitter Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("EmojiOne Mozilla"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Emoji Two"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Emoji One"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Emoji"), op: 2 /* String */}, &expression{u: String("Android Emoji"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Noto Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Apple Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Segoe UI Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Twitter Color Emoji"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("EmojiOne Mozilla"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Emoji Two"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("JoyPixels"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Emoji One"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Emoji"), op: 2 /* String */}, &expression{u: String("Android Emoji"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 2,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -8653,7 +9180,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("DejaVu Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Bitstream Vera Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Times New Roman"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Thorndale AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Roman No9 L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Roman"), op: 2 /* String */}, &expression{u: String("Times"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Noto Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("DejaVu Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Times New Roman"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Thorndale AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Serif"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Roman No9 L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Roman"), op: 2 /* String */}, &expression{u: String("Times"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -8667,7 +9194,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("DejaVu Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Bitstream Vera Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Verdana"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Arial"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Albany AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Sans L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Helvetica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lucida Sans Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG Glaho International"), op: 2 /* String */}, &expression{u: String("Tahoma"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Noto Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("DejaVu Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Verdana"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Arial"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Albany AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Sans L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Helvetica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lucida Sans Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG Glaho International"), op: 2 /* String */}, &expression{u: String("Tahoma"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -8681,7 +9208,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("DejaVu Sans Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Bitstream Vera Sans Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Inconsolata"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Andale Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Courier New"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Cumberland AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono PS"), op: 2 /* String */}, &expression{u: String("Courier"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Noto Sans Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("DejaVu Sans Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Inconsolata"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Andale Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Courier New"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Cumberland AMT"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Luxi Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono L"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nimbus Mono PS"), op: 2 /* String */}, &expression{u: String("Courier"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -8710,6 +9237,20 @@ var Standard = &Config{
 			}},
 			edits: []ruleEdit{{
 				expr:    &expression{u: exprTree{&expression{u: String("ITC Zapf Chancery Std"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Zapfino"), op: 2 /* String */}, &expression{u: String("Comic Sans MS"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      14, /* Prepend */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("system-ui"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: exprTree{&expression{u: String("Cantarell"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Segoe UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Segoe UI Historic"), op: 2 /* String */}, &expression{u: String("Segoe UI Symbol"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -11593,20 +12134,6 @@ var Standard = &Config{
 		{name: "confs/65-fonts-texgyre.conf", description: "", domain: "", subst: [matchKindEnd][]directive{nil, nil, nil}},
 		{name: "confs/65-khmer.conf", description: "", domain: "", subst: [matchKindEnd][]directive{{{
 			tests: []ruleTest{{
-				expr:   &expression{u: String("sans-serif"), op: 2 /* String */},
-				kind:   0,
-				qual:   0,
-				object: 1,     /* family */
-				op:     65558, /* Equal (ignore blanks) */
-			}},
-			edits: []ruleEdit{{
-				expr:    &expression{u: String("Khmer OS"), op: 2 /* String */},
-				binding: 0,
-				object:  1,  /* family */
-				op:      14, /* Prepend */
-			}},
-		}, {
-			tests: []ruleTest{{
 				expr:   &expression{u: String("serif"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
@@ -11614,21 +12141,21 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: String("Khmer OS"), op: 2 /* String */},
+				expr:    &expression{u: String("Khmer OS\""), op: 2 /* String */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
 			}},
 		}, {
 			tests: []ruleTest{{
-				expr:   &expression{u: String("monospace"), op: 2 /* String */},
+				expr:   &expression{u: String("sans-serif"), op: 2 /* String */},
 				kind:   0,
 				qual:   0,
 				object: 1,     /* family */
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: String("Khmer OS System"), op: 2 /* String */},
+				expr:    &expression{u: String("Khmer OS\""), op: 2 /* String */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -11643,7 +12170,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("Artsounk"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG UTF8 M"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kinnari"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Norasi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Frank Ruehl"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Dror"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("JG LaoTimes"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Saysettha Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Pigiarniq"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Davat"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Compset"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kacst-Qr"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Urdu Nastaliq Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Raghindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Mukti Narrow"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("padmaa"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("SimSun"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("PMingLiu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Zen Hei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Bitmap Song"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("HanyiSong"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Canonica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaMincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Zenkai Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ＭＳ 明朝"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumMyeongjo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnBatang"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Batang"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("KacstQura"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Frank Ruehl CLM"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Rachana"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Artsounk"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG UTF8 M"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kinnari"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Norasi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Frank Ruehl"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Dror"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("JG LaoTimes"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Saysettha Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Pigiarniq"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Davat"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Compset"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kacst-Qr"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Urdu Nastaliq Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Raghindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Mukti Narrow"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sampige"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("padmaa"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("SimSun"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("PMingLiu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Zen Hei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Bitmap Song"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("HanyiSong"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hiragino Mincho ProN"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Songti SC"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Songti TC"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("SimSong"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Canonica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaMincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Mincho"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Zenkai Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ＭＳ 明朝"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumMyeongjo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnBatang"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Batang"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AppleMyungjo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("KacstQura"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Frank Ruehl CLM"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Rachana"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -11657,7 +12184,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("Nachlieli"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lucida Sans Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Yudit Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kerkis"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ArmNet Helvetica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Artsounk"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG UTF8 M"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Waree"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Loma"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Garuda"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Umpush"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Saysettha Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("JG Lao Old Arial"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("GF Zemen Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Pigiarniq"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Davat"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Compset"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kacst-Qr"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Urdu Nastaliq Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Raghindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Mukti Narrow"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("padmaa"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UmePlus P Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Microsoft YaHei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Microsoft JhengHei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Zen Hei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Bitmap Song"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Moderna"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Modata"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Cosmetica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("VL Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ＭＳ ゴシック"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnDotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Dotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Gulim"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("KacstQura"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Meera"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Nachlieli"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lucida Sans Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Yudit Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kerkis"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ArmNet Helvetica"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Artsounk"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("BPG UTF8 M"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Waree"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Loma"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Garuda"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Umpush"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Saysettha Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("JG Lao Old Arial"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("GF Zemen Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Pigiarniq"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Davat"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("B Compset"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kacst-Qr"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Urdu Nastaliq Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Raghindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Mukti Narrow"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sampige"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("padmaa"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UmePlus P Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Microsoft YaHei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Microsoft JhengHei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Zen Hei"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("WenQuanYi Bitmap Song"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hiragino Sans"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("PingFang SC"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("PingFang TC"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("PingFang HK"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hiragino Sans CNS"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hiragino Sans GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MgOpen Modata"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("VL Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ＭＳ ゴシック"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TSCu_Paranar"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnDotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Dotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Gulim"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Apple SD Gothic Neo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("KacstQura"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Meera"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -11671,7 +12198,21 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: exprTree{&expression{u: String("Miriam Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("VL Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UmePlus Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NSimSun"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MingLiu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("HanyiSong"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothicCoding"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnDotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Dotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Gulim"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypist"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypewriter"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgMono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hasida"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Mitra Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("GF Zemen Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Meera"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				expr:    &expression{u: exprTree{&expression{u: String("Miriam Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("VL Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAMonaGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("IPAGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Sazanami Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Kochi Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL KaitiM GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UmePlus Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NSimSun"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MingLiu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL ShanHeiSun Uni"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL New Sung Mono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("HanyiSong"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL SungtiL GB"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("AR PL Mingti2L Big5"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("ZYSong18030"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothicCoding"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("NanumGothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("UnDotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Dotum"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Baekmuk Gulim"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypo"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypist"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgTypewriter"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("TlwgMono"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hasida"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("GF Zemen Unicode"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Hapax Berbère"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Bengali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Gujarati"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Hindi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Marathi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Maithili"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kashmiri"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Konkani"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Nepali"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Sindhi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Punjabi"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Tamil"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Meera"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Malayalam"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Kannada"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Telugu"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lohit Oriya"), op: 2 /* String */}, &expression{u: String("LKLUG"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
+				binding: 0,
+				object:  1,  /* family */
+				op:      14, /* Prepend */
+			}},
+		}, {
+			tests: []ruleTest{{
+				expr:   &expression{u: String("system-ui"), op: 2 /* String */},
+				kind:   0,
+				qual:   0,
+				object: 1,     /* family */
+				op:     65558, /* Equal (ignore blanks) */
+			}},
+			edits: []ruleEdit{{
+				expr:    &expression{u: exprTree{&expression{u: String("Noto Sans Arabic UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Bengali UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Devanagari UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Gujarati UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Gurmukhi UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Kannada UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Khmer UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Lao UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Malayalam UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Myanmar UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Oriya UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Sinhala UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Tamil UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Telugu UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Noto Sans Thai UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Leelawadee UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Nirmala UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Yu Gothic UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Meiryo UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("MS UI Gothic"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Khmer UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Lao UI"), op: 2 /* String */}, &expression{u: exprTree{&expression{u: String("Microsoft YaHei UI"), op: 2 /* String */}, &expression{u: String("Microsoft JhengHei UI"), op: 2 /* String */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */}}, op: 36 /* Comma */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -13417,7 +13958,8 @@ var Standard = &Config{
 				op:      14, /* Prepend */
 			}},
 		}}, nil, nil}},
-		{name: "confs/70-no-bitmaps.conf", description: "Reject bitmap fonts", domain: "", subst: [matchKindEnd][]directive{nil, nil, nil}},
+		{name: "confs/70-no-bitmaps-and-emoji.conf", description: "Reject bitmap fonts, including bitmap emoji fonts", domain: "", subst: [matchKindEnd][]directive{nil, nil, nil}},
+		{name: "confs/70-no-bitmaps-except-emoji.conf", description: "Reject bitmap fonts except bitmap emoji fonts", domain: "", subst: [matchKindEnd][]directive{nil, nil, nil}},
 		{name: "confs/70-yes-bitmaps.conf", description: "Accept bitmap fonts", domain: "", subst: [matchKindEnd][]directive{nil, nil, nil}},
 		{name: "confs/80-delicious.conf", description: "", domain: "", subst: [matchKindEnd][]directive{nil, nil, {{
 			tests: []ruleTest{{
@@ -14069,7 +14611,7 @@ var Standard = &Config{
 	customObjects:  map[string]Object{"pixelsizefixupfactor": 0x4a, "scalingnotneeded": 0x4b},
 	acceptGlobs:    map[string]bool{},
 	rejectGlobs:    map[string]bool{},
-	acceptPatterns: Fontset{Pattern{25 /* scalable */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}}},
+	acceptPatterns: Fontset{Pattern{24 /* outline */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}}},
 	rejectPatterns: Fontset{Pattern{1 /* family */ : &valueList{valueElt{Value: String("LMMono10"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
 		Pattern{1 /* family */ : &valueList{valueElt{Value: String("LMMonoCaps10"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
 		Pattern{1 /* family */ : &valueList{valueElt{Value: String("LMMonoLt10"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
@@ -14095,6 +14637,7 @@ var Standard = &Config{
 		Pattern{1 /* family */ : &valueList{valueElt{Value: String("TeXGyrePagella"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
 		Pattern{1 /* family */ : &valueList{valueElt{Value: String("TeXGyreSchola"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
 		Pattern{1 /* family */ : &valueList{valueElt{Value: String("TeXGyreTermes"), Binding: 1}}, 37 /* fontformat */ : &valueList{valueElt{Value: String("Type 1"), Binding: 1}}},
-		Pattern{25 /* scalable */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}}},
+		Pattern{24 /* outline */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}},
+		Pattern{24 /* outline */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}, 25 /* scalable */ : &valueList{valueElt{Value: Bool(0), Binding: 1}}}},
 	maxObjects: 22,
 }
