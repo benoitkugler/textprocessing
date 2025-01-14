@@ -12631,7 +12631,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: String("Khmer OS\""), op: 2 /* String */},
+				expr:    &expression{u: String("Khmer OS"), op: 2 /* String */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */
@@ -12645,7 +12645,7 @@ var Standard = &Config{
 				op:     65558, /* Equal (ignore blanks) */
 			}},
 			edits: []ruleEdit{{
-				expr:    &expression{u: String("Khmer OS\""), op: 2 /* String */},
+				expr:    &expression{u: String("Khmer OS"), op: 2 /* String */},
 				binding: 0,
 				object:  1,  /* family */
 				op:      14, /* Prepend */

@@ -115,7 +115,7 @@ func TestSubstitutionsPixelsize(t *testing.T) {
 
 func TestSubstitution(t *testing.T) {
 	pat := NewPattern()
-	pat.AddString(FAMILY, "Arial")
+	pat.AddString(FAMILY, "Helvetica")
 	Standard.Substitute(pat, nil, MatchQuery)
 	families := pat.GetStrings(FAMILY)
 	seen := strSet{}
