@@ -130,13 +130,16 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 					log.Println("ignored test", tests)
 					continue
 				}
+
+				langVar := "language.Lang" + strings.ReplaceAll(strings.Title(string(language.NewLanguage(lang))), "-", "_")
+
 				switch langOp {
 				case opEqual:
 					switch famOp {
 					case opEqual:
-						subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
+						subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang: %s,family: %q}", langVar, fam)
 					case opNotEqual:
-						subs.TestCode = fmt.Sprintf("langEqualsAndNoFamily{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
+						subs.TestCode = fmt.Sprintf("langEqualsAndNoFamily{lang: %s,family: %q}", langVar, fam)
 						subs.OpCode = "opAppendLast"
 					default:
 						return nil, fmt.Errorf("family op not supported: %v", tests)
@@ -145,7 +148,8 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 					if famOp != opEqual {
 						return nil, fmt.Errorf("family op not supported: %v", tests)
 					}
-					subs.TestCode = fmt.Sprintf("langContainsAndFamilyEquals{lang: language.NewLanguage(%q),family: %q}", language.NewLanguage(lang), fam)
+					// we replace contains by equal since lang are already normalized
+					subs.TestCode = fmt.Sprintf("langAndFamilyEqual{lang: %s,family: %q}", langVar, fam)
 				default:
 					return nil, fmt.Errorf("test not supported: %v", tests)
 				}
@@ -167,7 +171,7 @@ func GenerateSubstitution() ([]ExportedFamilySubstitution, error) {
 			case vbWeak:
 				subs.Importance = 'w'
 			case vbSame:
-				if !(strings.HasPrefix(subs.TestCode, "familyEquals") || strings.HasPrefix(subs.TestCode, "langContainsAndFamilyEquals") || strings.HasPrefix(subs.TestCode, "familyContains")) {
+				if !(strings.HasPrefix(subs.TestCode, "familyEquals") || strings.HasPrefix(subs.TestCode, "langAndFamilyEqual") || strings.HasPrefix(subs.TestCode, "familyContains")) {
 					return nil, fmt.Errorf("unsupported precedence 'equal' for test %s", subs.TestCode)
 				}
 				subs.Importance = 'e'
