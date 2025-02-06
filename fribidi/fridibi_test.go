@@ -201,7 +201,7 @@ func processFile(filename string, fileOut io.Writer) error {
 
 		/* Remove explicit marks, if asked for. */
 		if doClean {
-			out.Str = removeBidiMarks(out.Str, logToVis, out.VisualToLogical, out.EmbeddingLevels)
+			out.Str = RemoveBidiMarks(out.Str, logToVis, out.VisualToLogical, out.EmbeddingLevels)
 		}
 		if showVisual {
 			fmt.Fprintf(fileOut, "%s", nlFound)

@@ -458,7 +458,7 @@ func LogicalToVisual(flags Options, str []rune, paragraphBaseDir *ParType /* req
 	return Visual{Str: visualStr, VisualToLogical: positionsVToL, EmbeddingLevels: embeddingLevels}, maxLevel
 }
 
-// removeBidiMarks removes the bidi and boundary-neutral marks out of an string
+// RemoveBidiMarks removes the bidi and boundary-neutral marks out of an string
 // and the accompanying lists.  It implements rule X9 of the Unicode
 // Bidirectional Algorithm available at
 // http://www.unicode.org/reports/tr9/#X9, with the exception that it removes
@@ -477,7 +477,7 @@ func LogicalToVisual(flags Options, str []rune, paragraphBaseDir *ParType /* req
 // lines; but feel free to do otherwise if you know what you are doing.
 //
 // The input slice is mutated and resliced to its new length, then returned
-func removeBidiMarks(str []rune, positionsToThis, positionFromThis []int, embeddingLevels []Level) []rune {
+func RemoveBidiMarks(str []rune, positionsToThis, positionFromThis []int, embeddingLevels []Level) []rune {
 	/* If to_this is not NULL, we must have from_this as well. If it is
 	not given by the caller, we have to make a private instance of it. */
 	if len(positionsToThis) != 0 && len(positionFromThis) == 0 {
