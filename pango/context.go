@@ -1177,31 +1177,28 @@ func (context *Context) checkFontmapChanged() {
 //    return context.font_desc;
 //  }
 
-//  /**
-//   * pango_context_set_base_dir:
-//   * `context`: a #Context
-//   * @direction: the new base direction
-//   *
-//   * Sets the base direction for the context.
-//   *
-//   * The base direction is used in applying the Unicode bidirectional
-//   * algorithm; if the @direction is %PANGO_DIRECTION_LTR or
-//   * %PANGO_DIRECTION_RTL, then the value will be used as the paragraph
-//   * direction in the Unicode bidirectional algorithm.  A value of
-//   * %PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only
-//   * for paragraphs that do not contain any strong characters themselves.
-//   **/
-//  void
-//  pango_context_set_base_dir (Context  *context,
-// 				 PangoDirection direction)
-//  {
-//    g_return_if_fail (context != nil);
+/**
+ * pango_context_set_base_dir:
+ * `context`: a #Context
+ * @direction: the new base direction
+ *
+ * Sets the base direction for the context.
+ *
+ * The base direction is used in applying the Unicode bidirectional
+ * algorithm; if the @direction is %PANGO_DIRECTION_LTR or
+ * %PANGO_DIRECTION_RTL, then the value will be used as the paragraph
+ * direction in the Unicode bidirectional algorithm.  A value of
+ * %PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only
+ * for paragraphs that do not contain any strong characters themselves.
+ **/
+func (context *Context) SetBaseDir(direction Direction) {
+	// g_return_if_fail(context != nil)
 
-//    if (direction != context.base_dir)
-// 	 contextChanged (context);
-
-//    context.base_dir = direction;
-//  }
+	if direction != context.baseDir {
+		context.contextChanged()
+	}
+	context.baseDir = direction
+}
 
 //  /**
 //   * pango_context_get_base_dir:
